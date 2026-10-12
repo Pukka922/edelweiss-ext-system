@@ -1,0 +1,43 @@
+{
+  "loading": "Loading system information…",
+  "info": {
+    "title": "System",
+    "os": "Operating system",
+    "kernel": "Kernel",
+    "arch": "Architecture",
+    "cpu": "Processor",
+    "memory": "Memory",
+    "uptime": "Uptime"
+  },
+  "cpu": { "title": "CPU", "detail": "{{ cores }} cores" },
+  "memory": { "title": "Memory" },
+  "swap": { "title": "Swap", "none": "no swap" },
+  "load": { "title": "Load", "detail": "1 / 5 / 15 minutes" },
+  "disks": {
+    "title": "File systems",
+    "mount": "Mount point",
+    "device": "Device",
+    "type": "Type",
+    "used": "Usage",
+    "empty": "No file systems found."
+  },
+  "net": {
+    "title": "Network",
+    "iface": "Interface",
+    "rx": "Receive",
+    "tx": "Send",
+    "empty": "No network interfaces found."
+  },
+  "stream": { "connecting": "Connecting to live data…", "error": "Live data unavailable" },
+  "hostname": {
+    "change": "Change hostname",
+    "title": "Change hostname",
+    "label": "New hostname",
+    "save": "Save",
+    "cancel": "Cancel",
+    "invalid": "Use letters, digits and hyphens; separate labels with dots. At most 64 characters; the last label must not consist of digits only.",
+    "saved": "Hostname changed to {{ hostname }}.",
+    "failed": "Could not change the hostname: {{ message }}"
+  },
+  "uptime": { "days": "{{ n }} d", "hours": "{{ n }} h", "minutes": "{{ n }} min" }
+}

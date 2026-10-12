@@ -1,0 +1,43 @@
+{
+  "loading": "Systeminformationen werden geladen…",
+  "info": {
+    "title": "System",
+    "os": "Betriebssystem",
+    "kernel": "Kernel",
+    "arch": "Architektur",
+    "cpu": "Prozessor",
+    "memory": "Arbeitsspeicher",
+    "uptime": "Laufzeit"
+  },
+  "cpu": { "title": "CPU", "detail": "{{ cores }} Kerne" },
+  "memory": { "title": "Arbeitsspeicher" },
+  "swap": { "title": "Swap", "none": "kein Swap" },
+  "load": { "title": "Last", "detail": "1 / 5 / 15 Minuten" },
+  "disks": {
+    "title": "Dateisysteme",
+    "mount": "Einhängepunkt",
+    "device": "Gerät",
+    "type": "Typ",
+    "used": "Belegung",
+    "empty": "Keine Dateisysteme gefunden."
+  },
+  "net": {
+    "title": "Netzwerk",
+    "iface": "Schnittstelle",
+    "rx": "Empfangen",
+    "tx": "Senden",
+    "empty": "Keine Netzwerkschnittstellen gefunden."
+  },
+  "stream": { "connecting": "Verbinde mit Live-Daten…", "error": "Live-Daten nicht verfügbar" },
+  "hostname": {
+    "change": "Hostname ändern",
+    "title": "Hostname ändern",
+    "label": "Neuer Hostname",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "invalid": "Erlaubt sind Buchstaben, Ziffern und Bindestriche; Teile mit Punkten trennen. Höchstens 64 Zeichen; der letzte Teil darf nicht nur aus Ziffern bestehen.",
+    "saved": "Hostname geändert auf {{ hostname }}.",
+    "failed": "Hostname konnte nicht geändert werden: {{ message }}"
+  },
+  "uptime": { "days": "{{ n }} T", "hours": "{{ n }} Std", "minutes": "{{ n }} Min" }
+}
