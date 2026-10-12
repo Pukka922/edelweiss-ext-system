@@ -1,5 +1,5 @@
-github.com/Pukka922/edelweiss/sdk v0.1.0 h1:L7987Xt2IwxmwEHJbeYuFOZJHKRARjK3BdPsqmuuov8=
-github.com/Pukka922/edelweiss/sdk v0.1.0/go.mod h1:BXRAMki9vcZ9JEKDKipOkgGBXjD+/JYyoimHhzd6n2o=
+github.com/Pukka922/edelweiss/sdk v0.2.0 h1:Lh++yhAg7d2tvS2V9ZDgvhuRpA/BocknhDJ77rZEOI0=
+github.com/Pukka922/edelweiss/sdk v0.2.0/go.mod h1:BXRAMki9vcZ9JEKDKipOkgGBXjD+/JYyoimHhzd6n2o=
 github.com/andybalholm/brotli v1.2.2 h1:HzTuoo2ErYQqf5qvcJInB8uvqSVxRttzkFexPWtnceM=
 github.com/andybalholm/brotli v1.2.2/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

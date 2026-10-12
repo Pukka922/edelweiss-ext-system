@@ -3,7 +3,7 @@ module github.com/Pukka922/edelweiss-ext-system
 go 1.26.0
 
 require (
-	github.com/Pukka922/edelweiss/sdk v0.1.0
+	github.com/Pukka922/edelweiss/sdk v0.2.0
 	github.com/gofiber/fiber/v3 v3.5.0
 	golang.org/x/sys v0.48.0
 )

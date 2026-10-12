@@ -13,6 +13,11 @@ edelweiss SDKs. It has the same layout as the template
 extension, start from edelweiss-ext-hello; see
 [Developing edelweiss extensions](https://github.com/Pukka922/edelweiss/blob/main/docs/extension-development.md).
 
+## Requirements
+
+edelweiss 0.2.0 or newer: the build scopes the style sheet of the extension to its container, which edelweiss 0.1.0 does
+not render, so there the extension would show without its styles.
+
 ## Installation
 
 On the edelweiss host, as root:
@@ -34,7 +39,7 @@ detector, which needs cgo).
 make build                    # the UI, then static binaries for amd64 and arm64 in build/
 make test                     # Go (race detector), vitest and the test of the release guards (scripts/)
 make lint                     # go vet, gofmt, Biome, TypeScript, actionlint
-make release VERSION=0.1.0    # release files in dist/: edelweiss-ext-system_0.1.0_linux_<amd64|arm64>, checksums.txt
+make release VERSION=0.2.0    # release files in dist/: edelweiss-ext-system_0.2.0_linux_<amd64|arm64>, checksums.txt
 ```
 
 The Go module requires `github.com/Pukka922/edelweiss/sdk`, and `ui/package.json` names the JS SDK by its download
@@ -60,11 +65,13 @@ make build test lint
 
 None of this needs github.com.
 
+- Do not run `go get`, `go mod tidy` or a plain `npm install` in `ui/` while the SDK version you require is
+  unpublished: all three would look it up on GitHub. For a new Go requirement use
+  `make tidy GET=<module>@<version>`: it runs `go get` and `go mod tidy` with a temporary `replace` to the local SDK and
+  removes the `replace` again.
 - To switch back to the published SDKs, run `rm -f go.work go.work.sum && rm -rf ui/node_modules`. The next `make`
   runs `npm ci`, but only after the first publication: before it there is no `ui/package-lock.json`, and `make` asks
   for `make dev-sdk` again.
-- Do not run `go mod tidy` or a plain `npm install` in `ui/` while the SDK version you require is unpublished: both
-  would look it up on GitHub.
 
 In the edelweiss dev environment, `make dev` (in `../edelweiss`) builds this repository with `make dev-sdk` and
 `make build`. It then runs the extension in its container on http://localhost:9090.
@@ -122,35 +129,19 @@ The CI workflow (`.github/workflows/ci.yml`) runs `make lint test build` on ever
 
 ## First publication
 
-Until edelweiss publishes its SDKs, this repository has no `ui/package-lock.json`, and `go.sum` has no entry for
-`github.com/Pukka922/edelweiss/sdk`. Its workflows fail until then. The order:
+edelweiss 0.2.0 is published, and this repository uses its SDKs: `go.sum` and `ui/package-lock.json` pin them,
+so `go get`, `go mod tidy` and `npm ci` work directly and the workflows build without an edelweiss checkout. What is
+left is the repository on GitHub:
 
-1. Publish edelweiss `v0.1.0` (its README, "Releasing"). Its release workflow attaches `edelweiss-sdk-0.1.0.tgz` and
-   sets the tag `sdk/v0.1.0`.
-2. Here, switch to the published SDKs and commit the lock data:
-
-   ```sh
-   rm -f go.work go.work.sum
-   rm -rf ui/node_modules
-   go get github.com/Pukka922/edelweiss/sdk@v0.1.0
-   go mod tidy
-   (cd ui && npm install)
-   make lint test build
-   git add go.mod go.sum ui/package-lock.json
-   git commit -m "build: use the published edelweiss sdks v0.1.0"
-   ```
-
-   If `go get` reports an unknown revision right after the edelweiss release, the module proxy has not seen the tag
-   yet. Wait a few minutes, or run `GOPROXY=direct go get github.com/Pukka922/edelweiss/sdk@v0.1.0`.
-3. Create the public repository `Pukka922/edelweiss-ext-system` on GitHub. Recommended before the first tag: a tag
+1. Create the public repository `Pukka922/edelweiss-ext-system` on GitHub. Recommended before the first tag: a tag
    ruleset (Settings → Rules → Rulesets, target: tags) that blocks deleting and updating the tags `v*`, so that a
    published version cannot be moved by mistake (see Releasing above). Then push `main` and the tag:
 
    ```sh
    git remote add origin https://github.com/Pukka922/edelweiss-ext-system.git
    git push -u origin main
-   git tag v0.1.0
-   git push origin v0.1.0
+   git tag v0.2.0
+   git push origin v0.2.0
    ```
 
    When the release workflow has finished, `edelweissd ext install Pukka922/edelweiss-ext-system` installs the

@@ -1,6 +1,6 @@
 {
   "name": "@edelweiss/ext-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@edelweiss/sdk": "https://github.com/Pukka922/edelweiss/releases/download/v0.1.0/edelweiss-sdk-0.1.0.tgz",
+    "@edelweiss/sdk": "https://github.com/Pukka922/edelweiss/releases/download/v0.2.0/edelweiss-sdk-0.2.0.tgz",
     "solid-js": "^1.9.17"
   },
   "devDependencies": {

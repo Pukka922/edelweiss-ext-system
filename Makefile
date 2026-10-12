@@ -21,7 +21,7 @@ RELEASE_FILES = $(foreach arch,$(ARCHES),$(BINARY)_$(VERSION)_linux_$(arch))
 # npm's record of the installed packages: npm ci writes it, and so does make dev-sdk.
 UI_DEPS := ui/node_modules/.package-lock.json
 
-.PHONY: build ui test lint lint-workflows release-check release gh-release dev-sdk
+.PHONY: build ui test lint lint-workflows release-check release gh-release dev-sdk tidy
 
 # The UI (embedded by main.go), then static binaries for amd64 and arm64 in build/.
 build: ui
@@ -120,3 +120,12 @@ dev-sdk:
 	$(MAKE) -C $(EDELWEISS_ABS) sdk-pack
 	v=$$(sed -n 's/^ *"version": *"\([^"]*\)".*/\1/p' $(EDELWEISS_ABS)/web/sdk/package.json) && \
 		cd ui && npm install --no-save --no-package-lock --no-audit --no-fund $(EDELWEISS_ABS)/dist/edelweiss-sdk-$$v.tgz
+
+# Go requirements before the first publication of edelweiss: go get and go mod tidy cannot fetch the unpublished SDK, so
+# they run with a temporary replace to the SDK in EDELWEISS_DIR, which is removed again (go.sum then has no entry for the
+# SDK, as before). GET names modules to add at exact versions, e.g. make tidy GET=<module>@<version>.
+# make itself defines GET (= get, for SCCS), so only a GET from the command line or the environment counts.
+tidy:
+	$(GO) mod edit -replace $(SDK_MODULE)=$(EDELWEISS_ABS)/sdk
+	GOWORK=off sh -c '$(if $(filter command line environment,$(origin GET)),$(GO) get $(GET) && )$(GO) mod tidy'; s=$$?; \
+		$(GO) mod edit -dropreplace $(SDK_MODULE); exit $$s
