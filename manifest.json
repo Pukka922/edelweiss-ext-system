@@ -1,6 +1,6 @@
 {
   "id": "system",
-  "version": "0.2.0",
+  "version": "0.0.0-dev",
   "apiVersion": 1,
   "name": { "de": "Übersicht", "en": "Overview" },
   "description": {
